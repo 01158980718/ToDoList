@@ -3,11 +3,14 @@ package com.example.lastversion
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lastversion.databinding.FragmentListBinding
@@ -46,20 +49,10 @@ class ListFragment : Fragment() {
                 ))
             },
             onItemDelete = { adapterPair ->
-                // Remove item from the list
-                list.remove(adapterPair.first)
-                // Update the adapter and RecyclerView
-                adapter.setTaskList(list)
-                adapter.notifyItemRemoved(adapterPair.second)
-
-                // Save updated list to SharedPreferences
-                saveTaskListToPreferences()
-
-                // Check if list is empty and notify MainActivity
-                if (list.isEmpty()) {
-                    val mainActivity = activity as? MainActivity
-                    mainActivity?.updateUIBasedOnTaskList()
-                }
+                showDeleteConfirmationDialog(adapterPair)
+            },
+            onItemEdit = { adapterPair ->
+                showEditDialog(adapterPair)
             }
         )
 
@@ -76,6 +69,94 @@ class ListFragment : Fragment() {
         if (taskName != null && taskDescription != null) {
             addItemToList(taskName, taskDescription)
         }
+    }
+
+    private fun showDeleteConfirmationDialog(adapterPair: Pair<TaskData, Int>) {
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle("Delete Task")
+            .setMessage("Are you sure you want to delete this task?")
+            .setPositiveButton("Yes") { dialog, _ ->
+                deleteTask(adapterPair)
+                dialog.dismiss()
+            }
+            .setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+        dialog.show()
+    }
+
+    private fun deleteTask(adapterPair: Pair<TaskData, Int>) {
+        // Remove item from the list
+        list.remove(adapterPair.first)
+        // Update the adapter and RecyclerView
+        adapter.setTaskList(list)
+        adapter.notifyItemRemoved(adapterPair.second)
+
+        // Save updated list to SharedPreferences
+        saveTaskListToPreferences()
+
+        // Check if list is empty and notify MainActivity
+        if (list.isEmpty()) {
+            val mainActivity = activity as? MainActivity
+            mainActivity?.updateUIBasedOnTaskList()
+        }
+    }
+
+    private fun showEditDialog(adapterPair: Pair<TaskData, Int>) {
+        val taskData = adapterPair.first
+
+        val editView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_edit_task, null)
+        val taskNameEditText = editView.findViewById<EditText>(R.id.editTaskName)
+        val taskDescriptionEditText = editView.findViewById<EditText>(R.id.editTaskDescription)
+
+        taskNameEditText.setText(taskData.TaskName)
+        taskDescriptionEditText.setText(taskData.TaskDescription)
+
+        val editDialog = AlertDialog.Builder(requireContext())
+            .setTitle("Edit Task")
+            .setView(editView)
+            .setPositiveButton("Update") { dialog, _ ->
+                showUpdateConfirmationDialog(adapterPair, taskNameEditText.text.toString(), taskDescriptionEditText.text.toString())
+                dialog.dismiss()
+            }
+            .setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+        editDialog.show()
+    }
+
+    private fun showUpdateConfirmationDialog(adapterPair: Pair<TaskData, Int>, newTaskName: String, newTaskDescription: String) {
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle("Confirm Update")
+            .setMessage("Are you sure you want to update this task?")
+            .setPositiveButton("Yes") { dialog, _ ->
+                updateTask(adapterPair, newTaskName, newTaskDescription)
+                dialog.dismiss()
+            }
+            .setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+        dialog.show()
+    }
+
+    private fun updateTask(adapterPair: Pair<TaskData, Int>, newTaskName: String, newTaskDescription: String) {
+        val taskData = adapterPair.first
+        val position = adapterPair.second
+
+        taskData.TaskName = newTaskName
+        taskData.TaskDescription = newTaskDescription
+
+        // Update the adapter and RecyclerView
+        adapter.setTaskList(list)
+        adapter.notifyItemChanged(position)
+
+        // Save updated list to SharedPreferences
+        saveTaskListToPreferences()
+
+        Toast.makeText(requireContext(), "Task updated successfully", Toast.LENGTH_SHORT).show()
     }
 
     private fun addItemToList(taskName: String, taskDescription: String) {

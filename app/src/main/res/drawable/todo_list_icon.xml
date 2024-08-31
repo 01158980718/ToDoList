@@ -1,0 +1,106 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+
+    <!-- Outer Clipboard with Rounded Corners -->
+    <path
+        android:fillColor="#4A148C"
+        android:pathData="M20,10c0,-5.5 1.5,-5 10,-5h40c8.5,0 10,-0.5 10,5v60c0,5.5 -1.5,5 -10,5h-40c-8.5,0 -10,0.5 -10,-5z"
+        android:strokeColor="#311B92"
+        android:strokeWidth="2"/>
+
+    <!-- Paper with Drop Shadow -->
+    <path
+        android:fillColor="#EDE7F6"
+        android:pathData="M25,10c0,-2 0.5,-2 5,-2h40c4.5,0 5,0 5,2v65c0,2 -0.5,2 -5,2h-40c-4.5,0 -5,0 -5,-2z"
+        android:strokeColor="#B39DDB"
+        android:strokeWidth="2"/>
+
+    <!-- Clip at the Top with Inner Circle -->
+    <circle
+        android:fillColor="#311B92"
+
+
+     />
+
+    <circle
+        android:fillColor="#673AB7"
+
+
+        />
+
+    <!-- Detailed Checkmarks -->
+    <path
+        android:fillColor="#4A148C"
+        android:pathData="M30,25l3,3l8,-8"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"/>
+
+    <path
+        android:fillColor="#4A148C"
+        android:pathData="M30,40l3,3l8,-8"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"/>
+
+    <!-- Heart Icon with Inner Shadow -->
+    <path
+        android:fillColor="#4A148C"
+        android:pathData="M30,55c-1,-1 -2,-3 0,-4c2,-1 4,0 5,2c1,-2 3,-3 5,-2c2,1 1,3 0,4c-1,1 -5,5 -5,5z" />
+
+    <path
+        android:fillColor="#311B92"
+        android:pathData="M30,55c-1,-1 -2,-3 0,-4c2,-1 4,0 5,2c1,-2 3,-3 5,-2c2,1 1,3 0,4c-1,1 -5,5 -5,5z"
+        android:translateX="1"
+        android:translateY="1"/>
+
+    <!-- Text Lines with Spacing -->
+    <path
+        android:fillColor="#4A148C"
+        android:pathData="M45,25h25"
+        android:strokeWidth="2"
+        android:strokeLineCap="round" />
+
+    <path
+        android:fillColor="#4A148C"
+        android:pathData="M45,40h25"
+        android:strokeWidth="2"
+        android:strokeLineCap="round" />
+
+    <path
+        android:fillColor="#4A148C"
+        android:pathData="M45,55h25"
+        android:strokeWidth="2"
+        android:strokeLineCap="round" />
+
+    <!-- Folded Corner with Border -->
+    <path
+        android:fillColor="#CE93D8"
+        android:pathData="M60,68l10,-10v10h-10z" />
+
+    <path
+        android:fillColor="#673AB7"
+        android:pathData="M60,68l10,-10v10h-10z"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"/>
+
+    <!-- Additional Shadow Details -->
+    <path
+        android:fillColor="#9575CD"
+        android:pathData="M24,15c0,-2 0.5,-2 5,-2h40c4.5,0 5,0 5,2v63c0,2 -0.5,2 -5,2h-40c-4.5,0 -5,0 -5,-2z"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"/>
+
+    <!-- Additional Border on the Paper -->
+    <path
+        android:fillColor="#D1C4E9"
+        android:pathData="M27,12c0,-1 0.5,-1 5,-1h36c4.5,0 5,0 5,1v63c0,1 -0.5,1 -5,1h-36c-4.5,0 -5,0 -5,-1z"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"/>
+</vector>

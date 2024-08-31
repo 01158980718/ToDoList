@@ -9,15 +9,41 @@
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/TaskName"
+        android:id="@+id/Task"
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="TaskName"
+        android:text="YourTaskDetials"
         android:textColor="@color/baby_purple"
         android:layout_marginTop="8dp"
-        android:textSize="30dp"/>
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"
+        />
 
+<com.google.android.material.card.MaterialCardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toBottomOf="@+id/Task"
+    android:padding="10dp"
+    app:strokeColor="@color/baby_purple"
+    app:strokeWidth="3dp"
+    android:layout_marginTop="10dp"
+android:backgroundTint="@color/baby_purple"   >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/TaskName"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="TaskName"
+        android:textColor="@color/white"
+        android:layout_marginTop="8dp"
+        android:textSize="30dp"
+        tools:ignore="MissingConstraints" />
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="match_parent"
         android:gravity="center"
@@ -27,9 +53,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/TaskName"
         android:text="TaskDescription"
-        android:textColor="@color/baby_purple"
+        android:textColor="@color/white"
         android:textSize="30dp"
-        />
+android:layout_marginBottom="10dp"   />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

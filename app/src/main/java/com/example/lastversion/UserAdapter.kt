@@ -7,7 +7,8 @@ import com.example.lastversion.databinding.ItemLayoutBinding
 
 class UserAdapter(
     private val onItemDetail: (TaskData) -> Unit,
-    private val onItemDelete: (Pair<TaskData, Int>) -> Unit
+    private val onItemDelete: (Pair<TaskData, Int>) -> Unit,
+    private val onItemEdit: (Pair<TaskData, Int>) -> Unit
 ) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
     var adapterList: MutableList<TaskData> = mutableListOf()
@@ -39,6 +40,9 @@ class UserAdapter(
             }
             binding.deleteButton.setOnClickListener {
                 onItemDelete(Pair(task, adapterPosition)) // Correctly use the Pair constructor
+            }
+            binding.editButton.setOnClickListener {
+                onItemEdit(Pair(task, adapterPosition))
             }
         }
     }
